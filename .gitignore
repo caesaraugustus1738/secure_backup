@@ -1,5 +1,5 @@
 #My local paths. So no one can spy on me!
-local_vars.pykey
+local_vars.py
 key.txt
 
 # Byte-compiled / optimized / DLL files
