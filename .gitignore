@@ -1,3 +1,7 @@
+#My local paths. So no one can spy on me!
+local_vars.pykey
+key.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
