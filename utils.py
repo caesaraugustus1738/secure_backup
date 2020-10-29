@@ -9,10 +9,11 @@ def cur_date_time():
 class PathStats:
 	'''Various stats of a path.'''
 	def __init__(self, path):
-		self._is_dir = "is_dir"
-		self._size = "size"
-		self._d_created = "date_created"
-		self._d_modified = "date_modified"
+		self._is_dir = 'is_dir'
+		self._size = 'size'
+		self._d_created = 'date_created'
+		self._d_modified = 'date_modified'
+		self._encrypted = 'encryped'
 		self._path = path
 
 		contents = {}
@@ -36,7 +37,7 @@ class PathStats:
 						self._d_modified]
 		stat_dict = {}
 		for key in stat_keys:
-			stat_dict[key] = ""	
+			stat_dict[key] = ''	
 
 		return stat_dict
 
@@ -44,13 +45,13 @@ class PathStats:
 	def date_created(self, path):
 		'''Date created in yyyy_mm_dd_hh:mm:ss.'''
 		stats = os.stat(path)
-		return time.strftime("%Y_%m_%d_%H:%M:%S", time.gmtime(stats.st_birthtime))
+		return time.strftime('%Y_%m_%d_%H:%M:%S', time.gmtime(stats.st_birthtime))
 
 
 	def date_modified(self, path):
 		'''Date modified in yyyy_mm_dd_hh:mm:ss.'''
 		stats = os.stat(path)
-		return time.strftime("%Y_%m_%d_%H:%M:%S", time.gmtime(stats.st_mtime))
+		return time.strftime('%Y_%m_%d_%H:%M:%S', time.gmtime(stats.st_mtime))
 
 
 	def size(self, path):
@@ -63,9 +64,9 @@ class PathStats:
 		'''Is path a dir.'''
 		mode = os.stat(path).st_mode
 		if S_ISDIR(mode):
-			return "True"
+			return 'True'
 		else:
-			return "False"
+			return 'False'
 
 
 

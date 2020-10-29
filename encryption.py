@@ -2,7 +2,7 @@ from cryptography import fernet
 
 
 def file_encrypter(file, key):
-	'''Encrypts single file with symmetrical Fernet encryption.
+	'''Encrypts file with symmetrical Fernet encryption.
 	'''
 	with open(file, 'rb') as f:
 		file_contents = f.read()
