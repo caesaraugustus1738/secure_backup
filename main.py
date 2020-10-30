@@ -1,7 +1,4 @@
-from pathlib import Path
 import archive as archive
-from pprint import pprint as pp
-import os
 
 
 # Retreive key

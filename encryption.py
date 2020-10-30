@@ -12,3 +12,7 @@ def file_encrypter(file, key):
 
 	with open(file, 'wb') as f:
 		f.write(encrypted_contents)
+
+def fernet_key_gen():
+	key = fernet.Fernet.generate_key()
+	return key.decode()

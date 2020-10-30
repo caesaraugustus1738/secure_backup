@@ -48,7 +48,7 @@ class Archive:
 							base_dir=base_dir)
 
 
-	def publish(self, secure=False, key=None, toc=True):
+	def publish(self, key=None, toc=True):
 		'''One function for various archive types.'''
 		os.makedirs(self._dest_path)
 		child_dir = self._dest_path.joinpath(self._dest_dir)
@@ -57,7 +57,7 @@ class Archive:
 			with open(str(child_dir) + '.json', 'w') as f:
 				f.write(self.toc())
 
-		if secure is True:
+		if key:
 			self.encrypt(key)
 			self.generate_archive(secure=True, key=key)
 		else:
@@ -74,7 +74,7 @@ class ArchiveStats():
 		self._source_path = source
 		pass
 		
-		
+
 	def tree_stats(self):
 		stats = {}
 		for root, dirs, files in os.walk(self._source_path):
