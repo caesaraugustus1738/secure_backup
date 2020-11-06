@@ -1,6 +1,10 @@
 #My local paths. So no one can spy on me!
 local_vars.py
 key.txt
+test_main.py
+archive_menu.py
+sandbox/
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
