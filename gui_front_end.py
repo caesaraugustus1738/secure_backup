@@ -11,11 +11,21 @@ class ArchiverGUI:
         self._default_key = '[copy and paste security key from here]'
         self._default_arc_path = '[enter path to be archived here]'
         self._default_arc_dest = '[enter archive destination path here]'
+        # self._archive_mode = 
+        # self._master_frame = self.gui.master_frame()
+        # self._root = self.gui._root
 
 
     def _master_frame(self):
         '''The highest level GUI parent.'''
-        self.master_frame = self.gui.master_frame()
+        master_frame = self.gui.master_frame(self.gui.root_gen())
+        return master_frame
+
+
+    def _mode_title(self, parent):
+        mode = self.gui.subframe(parent=parent, name='mode_title', width=self.gui._width, height=20, bgcol=self.gui._bgcol)
+        self.gui.frame_placer(mode, y=115, x=25)
+        self.gui.label(parent=mode, text='ARCHIVE MODE', bgcol='#71a3ae')
 
 
     def _design_naked_grid(self, parent, rowcol, cellcol):
@@ -27,14 +37,14 @@ class ArchiverGUI:
         col3_x=630
 
         grid = {
-        'row1_col1': self.gui.column_in_row(parent=rows['row1'], start_point=col1_x, width=150, colour=cellcol),
-        'row1_col2': self.gui.column_in_row(parent=rows['row1'], start_point=col2_x, width=600, colour=cellcol),
-        'row2_col1': self.gui.column_in_row(parent=rows['row2'], start_point=col1_x, width=150, colour=cellcol),
-        'row2_col2': self.gui.column_in_row(parent=rows['row2'], start_point=col2_x, width=600, colour=cellcol),
-        'row3_col1': self.gui.column_in_row(parent=rows['row3'], start_point=col2_x, width=600, colour=cellcol),
-        'row4_col1': self.gui.column_in_row(parent=rows['row4'], start_point=col2_x, width=150, colour=cellcol),
-        'row5_col1': self.gui.column_in_row(parent=rows['row5'], start_point=col3_x, width=150, colour=cellcol),
-        'row6_col1': self.gui.column_in_row(parent=rows['row6'], start_point=col3_x, width=150, colour=cellcol)
+        'row1_col1': self.gui.cell_in_row(parent=rows['row1'], start_point=col1_x, width=150, colour=cellcol),
+        'row1_col2': self.gui.cell_in_row(parent=rows['row1'], start_point=col2_x, width=600, colour=cellcol),
+        'row2_col1': self.gui.cell_in_row(parent=rows['row2'], start_point=col1_x, width=150, colour=cellcol),
+        'row2_col2': self.gui.cell_in_row(parent=rows['row2'], start_point=col2_x, width=600, colour=cellcol),
+        'row3_col1': self.gui.cell_in_row(parent=rows['row3'], start_point=col2_x, width=600, colour=cellcol),
+        'row4_col1': self.gui.cell_in_row(parent=rows['row4'], start_point=col2_x, width=150, colour=cellcol),
+        'row5_col1': self.gui.cell_in_row(parent=rows['row5'], start_point=col3_x, width=150, colour=cellcol),
+        'row6_col1': self.gui.cell_in_row(parent=rows['row6'], start_point=col3_x, width=150, colour=cellcol)
         }
         return grid
 
@@ -56,8 +66,8 @@ class ArchiverGUI:
         return grid
 
 
-    def _make_naked_grid(self):
-        naked_grid = self._naked_grid_placement(parent=self.master_frame, layout_preview=False)
+    def _make_naked_grid(self, parent):
+        naked_grid = self._naked_grid_placement(parent=parent, layout_preview=False)
         return naked_grid
 
 
@@ -126,15 +136,18 @@ class ArchiverGUI:
 
 
     def draw(self):
-        self._master_frame()
+        mf = self._master_frame()
         self._add_menu()
-        a_grid = self._make_naked_grid()
+        self._mode_title(parent=mf)
+        a_grid = self._make_naked_grid(mf)
         skin = self._archive_skin(a_grid)
         buttons = self._archive_buttons(a_grid)
         self._button_commands(buttons=buttons, skin=skin)
-        self.gui.draw(master=self.master_frame)
+        self.gui.draw(master=mf)
 
 
+class GUIView:
+    
 
     # def dress_unarchive_grid(self, grid):
     #     unarchive_clothing = {

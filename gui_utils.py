@@ -9,14 +9,19 @@ class Gui:
 		self._height = height
 		self._font = font
 		
-		
+
 	def root_gen(self):
+		'''All Tkinter GUI's begin with this object.'''
 		self._root = tk.Tk()
 		return self._root
 
 
-	def master_frame(self):
-		master_frame = tk.Frame(self.root_gen(), width=self._width, height=self._height, bg=self._bgcol)
+	def master_frame(self, parent):
+		'''Create the global GUI dimensions.
+
+		Frames are like canvases for Tkinter.
+		You place objects in frames, including other frames.'''
+		master_frame = tk.Frame(master=parent, width=self._width, height=self._height, bg=self._bgcol)
 		return master_frame
 
 
@@ -25,11 +30,13 @@ class Gui:
 		return name
 
 
-	def frame_placer(self, name, **kwargs):
-		name.place(kwargs)
+	def frame_placer(self, name, x=0, y=0):
+		'''Frames must be placed using this function.'''
+		name.place(x=x, y=y)
 
 
 	def rows(self, parent, height, num, vgap, colour):
+		'''Create multiple canvases as rows.'''
 		rows = {}
 		for r in range(1, num+1):
 			row_key = 'row' + str(r)
@@ -41,10 +48,11 @@ class Gui:
 		return rows
 
 
-	def column_in_row(self, parent, start_point, width, colour):
-		col = tk.Canvas(parent, bg=colour, highlightthickness=0)
-		col.place(x=start_point, width=width)
-		return col
+	def cell_in_row(self, parent, start_point, width, colour):
+		'''Create a cell in a row.'''
+		cell = tk.Canvas(parent, bg=colour, highlightthickness=0)
+		cell.place(x=start_point, width=width)
+		return cell
 
 
 	def label(self, parent, text, bgcol):
@@ -71,14 +79,16 @@ class Gui:
 
 
 	def button(self, parent, label, command=None):
-		'''No colour because Mac buttons don't change colour.'''
+		'''Mac cannot change button colour.'''
 		button = tk.Button(parent, text=label, command=command)
 		button.place(relwidth=1)
 		return button
 
 
 	def draw(self, master):
+		'''Draw the masterframe and all its contents.'''
 		self._root.title(self._title)
 		master.pack()
 		self._root.mainloop()
+
 
