@@ -1,17 +1,19 @@
 class Grid:
-    def __init__(self, gui, parent, layout_preview=False):
+    '''Create a frame containing a grid. 
+
+    Buttons/labels/entry fields can be placed on top of this grid.'''
+    def __init__(self, gui, parent):
         self.gui = gui
         self._parent = parent
-        self._layout_preview = layout_preview
-    # def __init__(self, gui, parent, rowcol, cellcol, frame_name, layout_preview=False):
-        # self._rowcol = rowcol
-        # self._cellcol = cellcol
-        # self._frame_name = frame_name
-        # self._layout_preview = layout_preview
 
 
-    def _design_naked_grid(self, parent, rowcol, cellcol):
-            '''Design layout.'''
+    def _naked_grid(self, parent):
+            '''Design grid for a frame.
+
+            To preview layout, change rowcol/cellcol.'''
+            rowcol=self.gui._bgcol
+            cellcol=self.gui._bgcol
+
             rows = self.gui.rows(parent=parent, height=20, num=6, vgap=26, colour=rowcol)
 
             col1_x=25
@@ -31,23 +33,32 @@ class Grid:
             return grid
 
 
-    def _naked_grid_placement(self, parent, layout_preview):
-        '''Place a subframe in the GUI and place design grid in subframe.'''
-        if layout_preview:
-            col1 = 'green'
-            col2 = 'red'
-            col3 = 'blue'
-        else:
-            col1 = self.gui._bgcol
-            col2 = self.gui._bgcol
-            col3 = self.gui._bgcol
-
-        grid_frame = self.gui.subframe(parent=parent, name='archive', width=800, height=190, bgcol=col1)
-        self.gui.frame_placer(name=grid_frame, y=140)
-        grid = self._design_naked_grid(parent=grid_frame, rowcol=col2, cellcol=col3)
-        return grid
+    def _grid_frame(self, parent, bgcol):
+        '''Make a frame for the grid.'''
+        return self.gui.subframe(parent=parent, width=800, height=190, bgcol=bgcol)
 
 
     def create_grid(self):
-        naked_grid = self._naked_grid_placement(parent=self._parent, layout_preview=self._layout_preview)
-        return naked_grid
+        '''Create and place a frame. Draw naked grid within frame.'''
+        frame = self._grid_frame(parent=self._parent, bgcol=self.gui._bgcol)
+        self.gui.frame_placer(frame=frame)
+        grid = self._naked_grid(parent=frame)
+        return {'grid': grid, 'frame': frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
