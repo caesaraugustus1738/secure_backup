@@ -6,7 +6,7 @@ class Archiver:
     '''Perform logic on data received from front end.'''
     def __init__(self):
         self.gui = frontend.ArchiverGUI(self)
-        self._default_key = self.gui._default_key
+        # self._default_key = self.gui._default_key
 
 
     def archive(self, inputs):

@@ -25,14 +25,14 @@ class Gui:
 		return master_frame
 
 
-	def subframe(self, parent, name, width, height, bgcol):
+	def subframe(self, parent, width, height, bgcol):
 		name = tk.Frame(parent, width=width, height=height, bg=bgcol)
 		return name
 
 
-	def frame_placer(self, name, x=0, y=0):
+	def frame_placer(self, frame, x=0, y=0):
 		'''Frames must be placed using this function.'''
-		name.place(x=x, y=y)
+		frame.place(x=x, y=y)
 
 
 	def rows(self, parent, height, num, vgap, colour):
